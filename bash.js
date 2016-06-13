@@ -6,36 +6,29 @@ process.stdout.write('prompt > ');
 // The stdin 'data' event fires after a user types in a line
 process.stdin.on('data', function (data) {
   var dataArr = data.toString().trim().toLowerCase().split(" ");
-  var prompter = function() {
-    return process.stdout.write('\nprompt > ');
-  }
 
   if (dataArr[0] === "pwd") {
-    commands.pwd();
-    prompter();
+    commands.pwd("_", commands.done);
   } else if (dataArr[0] === "date") {
-    commands.date();
-    prompter();
+    commands.date("_", commands.done);
   } else if (dataArr[0] === "ls") {
-    commands.ls();
+    commands.ls("_", commands.done);
   } else if (dataArr[0] === "echo") {
-    // console.log(dataArr[0], dataArr.slice(1));
-    commands.echo(dataArr.slice(1).join(" "));
-    prompter();
+    commands.echo(dataArr.slice(1).join(" "), commands.done);
   } else if (dataArr[0] === "cat") {
-    commands.cat(dataArr[1]);
+    commands.cat(dataArr[1], commands.done);
   } else if (dataArr[0] === "head") {
-    commands.head(dataArr[1]);
+    commands.head(dataArr[1], commands.done);
   } else if (dataArr[0] === "tail") {
-    commands.tail(dataArr[1]);
+    commands.tail(dataArr[1], commands.done);
   } else if (dataArr[0] === "sort") {
-    commands.sort(dataArr[1]);
+    commands.sort(dataArr[1], commands.done);
   } else if (dataArr[0] === "wc") {
-    commands.wc(dataArr[1]);
+    commands.wc(dataArr[1], commands.done);
   } else if (dataArr[0] === "uniq") {
-    commands.uniq(dataArr[1]);
+    commands.uniq(dataArr[1], commands.done);
+  } else if (dataArr[0] === "curl") {
+    commands.curl(dataArr[1], commands.done)
   }
-
-
 
 });
