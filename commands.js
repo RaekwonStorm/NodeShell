@@ -55,3 +55,39 @@ exports.tail = function(file) {
     process.stdout.write("prompt > ");
   });
 }
+
+exports.sort = function (file) {
+  fs.readFile(file, function(err, data) {
+    if (err) { throw err; }
+
+    process.stdout.write(data.toString().split('\n').sort().join("\n") + '\n');
+    process.stdout.write("prompt > ");
+  });
+}
+
+exports.wc = function (file) {
+  fs.readFile(file, function(err, data) {
+    if (err) { throw err; }
+
+    process.stdout.write(data.toString().split('\n').length.toString()+'\n');
+    process.stdout.write("prompt > ");
+  });
+}
+
+exports.uniq = function (file) {
+  fs.readFile(file, function(err, data) {
+    if (err) { throw err; }
+
+    var linesArr = data.toString().split('\n').sort();
+    var output = "";
+
+    linesArr.filter(function (element, index) {
+      if (element !== linesArr[index+1]) {
+        output += element + '\n';
+      }
+    })
+
+    process.stdout.write(output);
+    process.stdout.write("prompt > ");
+  })
+}

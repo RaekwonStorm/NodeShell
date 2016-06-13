@@ -28,9 +28,12 @@ process.stdin.on('data', function (data) {
     commands.head(dataArr[1]);
   } else if (dataArr[0] === "tail") {
     commands.tail(dataArr[1]);
-  } else {
-    var cmd = data.toString().trim(); // remove the newline
-    process.stdout.write('You typed: ' + cmd);
+  } else if (dataArr[0] === "sort") {
+    commands.sort(dataArr[1]);
+  } else if (dataArr[0] === "wc") {
+    commands.wc(dataArr[1]);
+  } else if (dataArr[0] === "uniq") {
+    commands.uniq(dataArr[1]);
   }
 
 
